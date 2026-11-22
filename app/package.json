@@ -9,14 +9,17 @@
     "preview": "vite preview",
     "test": "vitest run",
     "icons": "pwa-assets-generator",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "build:demo": "vite build --mode demo"
   },
   "dependencies": {
+    "d3-contour": "^4.0.3",
     "idb": "^8.0.4",
     "preact": "^11.2.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",
+    "@types/d3-contour": "^3.0.6",
     "@vite-pwa/assets-generator": "^2.0.0",
     "fake-indexeddb": "^6.2.8",
     "typescript": "^7.0.2",

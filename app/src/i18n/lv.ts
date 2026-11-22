@@ -75,6 +75,7 @@ export const lv = {
   delete: 'Dzēst',
 
   // System
+  demo: 'Demo', // NEW — badge in the /demo/ build with sample cards
   addToHomeScreen: 'Pievienot sākuma ekrānam',
   updateAvailable: 'Pieejama jauna versija',
   reload: 'Pārlādēt',

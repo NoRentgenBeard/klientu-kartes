@@ -9,8 +9,10 @@ async function start() {
   applyTheme(getTheme(await repo.getMeta('themeId')));
   void requestPersistentStorage(repo);
 
-  // Sample data only in dev mode (SPEC 9). Not part of the production bundle.
-  if (import.meta.env.DEV) {
+  // Sample data only in dev mode and the separate /demo/ build (SPEC 9, DECISIONS D8).
+  // Not part of the real app's bundle: the condition must be written inline (not via
+  // IS_DEMO) so the bundler can drop the sample-data chunk from the real build.
+  if (import.meta.env.DEV || import.meta.env.MODE === 'demo') {
     const [{ seedIfEmpty }, { canvasSeedPhoto }] = await Promise.all([
       import('./db/seed'),
       import('./db/seedPhoto'),

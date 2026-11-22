@@ -1,0 +1,168 @@
+/* Sākums — SPEC 6.1 */
+
+.sakums {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 48px;
+}
+
+.sakums__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  padding-top: 6px;
+}
+
+.sakums__header h1 {
+  margin: 0;
+}
+
+.sakums__demo {
+  margin-left: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--flag-bg);
+  color: var(--flag-text);
+  font-size: 13px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.sakums__actions {
+  display: flex;
+  gap: 4px;
+  margin-right: -10px; /* optically align icons with the right gutter */
+  color: var(--text);
+}
+
+.sakums__actions .btn-icon:active {
+  background: var(--grouped-fill);
+}
+
+/* Sections */
+
+.sakums__section {
+  margin-top: 18px;
+}
+
+.sakums__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 12px;
+}
+
+.sakums__section-head h2 {
+  margin: 0;
+}
+
+.sakums__counter {
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pinned: 2 × 2, never scrolls */
+
+.sakums__pinned {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Holder filter chips — scroll sideways on narrow screens */
+
+.sakums__chips {
+  display: flex;
+  gap: 8px;
+  margin: 26px calc(-1 * var(--gutter)) 0;
+  padding: 0 var(--gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sakums__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  font-size: 15px;
+  font-weight: 600;
+  /* 44-pt tap target around a 36-pt chip */
+  position: relative;
+}
+
+.chip::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+}
+
+.chip--selected {
+  background: var(--chip-selected-bg);
+  color: var(--chip-selected-text);
+}
+
+/* Holder groups */
+
+.sakums__group + .sakums__group {
+  margin-top: 26px;
+}
+
+.sakums__group-title {
+  margin: 0 0 10px 4px;
+  color: var(--group-header);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.sakums__group-count {
+  margin-left: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Wallet-style stack: each card shows its top 74 pt; the last one is shown in full. */
+
+.stack {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack__item {
+  position: relative;
+  height: 74px;
+}
+
+.stack__item:last-child {
+  height: auto;
+}
+
+.stack__item + .stack__item .card-face {
+  box-shadow:
+    inset 0 0 0 0.5px rgb(31 35 40 / 0.1),
+    0 -3px 12px rgb(31 35 40 / 0.1);
+}
+
+/* Empty state */
+
+.sakums__empty {
+  display: grid;
+  gap: 24px;
+  margin-top: 28vh;
+  text-align: center;
+}
+
+.sakums__empty p {
+  margin: 0;
+  padding: 0 12px;
+}

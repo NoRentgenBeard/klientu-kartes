@@ -9,10 +9,11 @@ npm test          # unit tests (dates, codes, styles, IndexedDB repository)
 npm run build     # type-check + production build into dist/ (no sample data)
 npm run preview   # serve dist/ at http://localhost:4173 with the service worker
 npm run icons     # regenerate PNG icons from public/icon.svg
-npm run deploy    # build and publish to GitHub Pages (commit first)
+npm run build:demo  # demo build with sample cards into dist/demo/
+npm run deploy    # build both and publish to GitHub Pages (commit first)
 ```
 
-Live app: https://norentgenbeard.github.io/klientu-kartes/ (served from the `gh-pages` branch).
+Live app: https://norentgenbeard.github.io/klientu-kartes/ · demo: https://norentgenbeard.github.io/klientu-kartes/demo/ (served from the `gh-pages` branch).
 
 Reset the dev sample data: delete the `klientu-kartes` IndexedDB database in the browser's dev tools and reload.
 

@@ -25,7 +25,9 @@ interface KartesDB extends DBSchema {
   meta: { key: keyof Meta; value: Meta[keyof Meta] };
 }
 
-export const DB_NAME = 'klientu-kartes';
+/** The demo build (/demo/) keeps its sample cards in a separate database (DECISIONS.md D8). */
+export const IS_DEMO = import.meta.env.MODE === 'demo';
+export const DB_NAME = IS_DEMO ? 'klientu-kartes-demo' : 'klientu-kartes';
 const DB_VERSION = 1;
 
 export const DEFAULT_HOLDERS: readonly Holder[] = [

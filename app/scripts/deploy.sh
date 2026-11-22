@@ -15,8 +15,9 @@ if [ -n "$(git -C "$REPO_ROOT" status --porcelain -- app)" ]; then
   exit 1
 fi
 
-npm run build
+npm run build && npm run build:demo
 touch dist/.nojekyll
+test -f dist/demo/index.html
 
 OUT="$(mktemp -d)"
 trap 'rm -rf "$OUT"' EXIT

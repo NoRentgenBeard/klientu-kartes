@@ -20,6 +20,8 @@ export function themeToCssVars(theme: Theme): Record<string, string> {
   vars['--contour-stroke'] = theme.contour.stroke;
   vars['--contour-opacity'] = String(theme.contour.opacity);
   vars['--contour-index-opacity'] = String(theme.contour.indexOpacity);
+  vars['--contour-width'] = `${theme.contour.width}px`;
+  vars['--contour-index-width'] = `${theme.contour.indexWidth}px`;
   return vars;
 }
 
