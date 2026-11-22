@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Placeholder icon: two stacked cards with contour lines. Full-bleed; iOS rounds the corners. -->
+  <defs>
+    <clipPath id="front"><rect x="86" y="196" width="340" height="214" rx="26"/></clipPath>
+  </defs>
+  <rect width="512" height="512" fill="#1F2328"/>
+  <rect x="106" y="122" width="300" height="190" rx="24" fill="#A9C2AE"/>
+  <rect x="86" y="196" width="340" height="214" rx="26" fill="#E3D4B8"/>
+  <g clip-path="url(#front)" fill="none" stroke="#1F2328" stroke-linejoin="round">
+    <g stroke-opacity="0.22" stroke-width="3">
+      <ellipse cx="330" cy="320" rx="30" ry="22"/>
+      <ellipse cx="326" cy="318" rx="62" ry="46" transform="rotate(-8 326 318)"/>
+      <ellipse cx="320" cy="316" rx="128" ry="94" transform="rotate(-10 320 316)"/>
+      <ellipse cx="316" cy="314" rx="162" ry="120" transform="rotate(-12 316 314)"/>
+      <ellipse cx="312" cy="312" rx="198" ry="146" transform="rotate(-14 312 312)"/>
+    </g>
+    <ellipse cx="323" cy="317" rx="95" ry="70" transform="rotate(-9 323 317)" stroke-opacity="0.42" stroke-width="4.5"/>
+  </g>
+  <rect x="112" y="222" width="104" height="18" rx="9" fill="#1F2328"/>
+</svg>

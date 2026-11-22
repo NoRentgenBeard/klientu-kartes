@@ -1,0 +1,22 @@
+# Real client card photos and backups — never commit
+paraugi/
+*.jpeg
+*.jpg
+*.heic
+*.HEIC
+klientu-kartes-kopija-*.json
+
+# Build / tooling
+node_modules/
+dist/
+dev-dist/
+coverage/
+.DS_Store
+*.log
+
+# Project documents stay on this Mac (not in the public repo)
+SPEC.md
+DECISIONS.md
+claude-design-prompt.md
+klientu-kartes-iphone-app-brief.md
+.claude/

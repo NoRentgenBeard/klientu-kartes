@@ -1,0 +1,28 @@
+.update-banner {
+  position: fixed;
+  left: calc(var(--safe-left) + var(--gutter));
+  right: calc(var(--safe-right) + var(--gutter));
+  bottom: calc(var(--safe-bottom) + 12px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 8px 8px 20px;
+  border-radius: 28px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+}
+
+.update-banner__btn {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 22px;
+  background: var(--button-text);
+  color: var(--button-bg);
+  font-weight: 700;
+}
