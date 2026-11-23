@@ -127,12 +127,14 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
           {codeOrPhoto('portrait')}
         </article>
 
-        <div class="kase-actions">
-          <RoundButton label={photo === 'off' ? lv.photo : lv.code} onClick={togglePhoto} active={photo !== 'off'}>
-            {photo === 'off' ? <PhotoIcon /> : <CodeIcon />}
-          </RoundButton>
-        </div>
-
+        <button
+          type="button"
+          class={`kase-photo-btn${photo !== 'off' ? ' kase-photo-btn--on' : ''}`}
+          onClick={togglePhoto}
+        >
+          {photo === 'off' ? <PhotoIcon /> : <CodeIcon />}
+          <span>{photo === 'off' ? lv.photo : lv.code}</span>
+        </button>
         {siblings.length > 1 && (
           <div class="kase-holders" role="group" aria-label={lv.holder}>
             {siblings.map((s) => (
@@ -148,7 +150,6 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
             ))}
           </div>
         )}
-
       </Sheet>
     </div>
   );
@@ -223,24 +224,6 @@ function Sheet({ children, onClose, label }: { children: preact.ComponentChildre
   );
 }
 
-function RoundButton({
-  label,
-  active,
-  onClick,
-  children,
-}: {
-  label: string;
-  active?: boolean;
-  onClick: () => void;
-  children: preact.ComponentChildren;
-}) {
-  return (
-    <button type="button" class={`kase-round${active ? ' kase-round--on' : ''}`} onClick={onClick} aria-label={label}>
-      <span class="kase-round__icon">{children}</span>
-      <span class="kase-round__label">{label}</span>
-    </button>
-  );
-}
 
 function PinIcon({ filled }: { filled: boolean }) {
   return (

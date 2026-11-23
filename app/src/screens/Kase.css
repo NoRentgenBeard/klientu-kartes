@@ -188,45 +188,30 @@
   border-radius: 0;
 }
 
-/* Round buttons under the card */
+/* Wide Foto / Kods button under the card — easy to hit with a thumb */
 
-.kase-actions {
+.kase-photo-btn {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 36px;
-  margin-top: 22px;
+  gap: 10px;
+  height: 56px;
+  margin-top: 18px;
+  border-radius: 28px;
+  background: var(--sheet-control);
+  color: var(--sheet-control-text);
+  font-size: 17px;
+  font-weight: 600;
   flex: none;
 }
 
-.kase-round {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  min-width: 64px;
+.kase-photo-btn:active {
+  filter: brightness(1.15);
 }
 
-.kase-round__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--sheet-control);
-  color: var(--sheet-control-text);
-}
-
-.kase-round--on .kase-round__icon {
+.kase-photo-btn--on {
   background: var(--tag-text);
   color: var(--tag-bg);
-}
-
-.kase-round__label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--sheet-control-text);
-  opacity: 0.85;
 }
 
 /* Holder switch at the bottom */
