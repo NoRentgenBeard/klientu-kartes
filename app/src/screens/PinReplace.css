@@ -1,0 +1,52 @@
+.pin-replace {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.pin-replace__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.45);
+  animation: kase-fade-in 0.2s ease-out;
+}
+
+.pin-replace__sheet {
+  position: relative;
+  padding: 22px calc(var(--safe-right) + var(--gutter)) calc(var(--safe-bottom) + 16px)
+    calc(var(--safe-left) + var(--gutter));
+  border-radius: 28px 28px 0 0;
+  background: var(--sheet);
+  color: var(--sheet-control-text);
+  animation: kase-slide-up 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pin-replace__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pin-replace__text {
+  margin: 4px 0 16px;
+  opacity: 0.8;
+}
+
+.pin-replace__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pin-replace__cancel {
+  width: 100%;
+  height: 56px;
+  margin-top: 18px;
+  border-radius: 28px;
+  background: var(--sheet-control);
+  font-size: 17px;
+  font-weight: 600;
+}

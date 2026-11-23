@@ -17,6 +17,8 @@ export interface Meta {
   lastBackupAt: string; // ISO timestamp
   themeId: string;
   storagePersisted: boolean;
+  /** The Spilgtums tip was shown once; afterwards the button is icon-only (SPEC 6.2). */
+  brightnessTipSeen: boolean;
 }
 
 interface KartesDB extends DBSchema {

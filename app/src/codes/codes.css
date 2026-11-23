@@ -1,0 +1,90 @@
+/* Generated code: pure black on pure white, generous quiet zone (SPEC 6.2). */
+
+.code-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--code-bg);
+  color: var(--code-ink);
+  border-radius: 14px;
+}
+
+.code-box__art {
+  width: 100%;
+}
+
+.code-box__art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.code-box__art svg path {
+  fill: var(--code-ink);
+  stroke: var(--code-ink);
+}
+
+.code-box__number {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-align: center;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.code-box__error {
+  margin: 24px 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* Portrait (inside the card on Kasē) */
+
+/* The quiet zone is inside the SVG (render.ts), so the box padding is small. */
+.code-box--portrait {
+  padding: 18px 8px 12px;
+}
+
+.code-box--portrait .code-box__art {
+  height: 104px;
+}
+
+.code-box--portrait.code-box--2d {
+  padding: 10px 10px 12px;
+}
+
+.code-box--portrait.code-box--2d .code-box__art {
+  width: min(100%, 220px);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.code-box--portrait .code-box__number {
+  margin-top: 10px;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+/* Landscape: the code as large as possible */
+
+.code-box--landscape {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  padding: 4px 8px 0;
+  border-radius: 0;
+}
+
+.code-box--landscape .code-box__art {
+  flex: 1;
+  min-height: 0;
+}
+
+.code-box--landscape .code-box__number {
+  margin-top: 8px;
+  font-size: 36px;
+  letter-spacing: 6px;
+  line-height: 1.1;
+}

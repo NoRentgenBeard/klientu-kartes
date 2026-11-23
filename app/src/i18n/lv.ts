@@ -26,6 +26,14 @@ export const lv = {
   photo: 'Foto',
   code: 'Kods',
   brightness: 'Spilgtums',
+  brightnessTip: 'Pagriez ekrāna spilgtumu uz maksimumu Vadības centrā — tad kasē kods nolasīsies ātrāk.', // NEW
+  ok: 'Labi', // NEW — closes the brightness tip
+  pin: 'Piespraust', // NEW — pin button (screen readers)
+  unpin: 'Atspraust', // NEW
+  pinFullTitle: 'Jau piespraustas 4 kartes', // NEW
+  pinFullText: 'Kuru aizstāt?', // NEW
+  codeUnavailable: 'No šī numura kodu izveidot nevar.', // NEW — shown if the number can't be drawn as a code
+  close: 'Aizvērt', // NEW — close Kasē (screen readers; swipe down also closes)
 
   // Iestatījumi
   settings: 'Iestatījumi',
