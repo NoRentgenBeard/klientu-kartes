@@ -5,7 +5,8 @@ iPhone loyalty-card PWA. Spec: `../SPEC.md`. Deviations: `../DECISIONS.md`.
 ```bash
 npm install
 npm run dev       # http://localhost:5173 — dev mode seeds the 14 sample cards
-npm test          # unit tests (dates, codes, styles, IndexedDB repository)
+npm test          # unit tests (dates, codes, styles, IndexedDB repository, scanner)
+SCAN_PHOTOS=1 npx vitest run src/scan/real-photos   # local only: scanner on ../paraugi photos
 npm run build     # type-check + production build into dist/ (no sample data)
 npm run preview   # serve dist/ at http://localhost:4173 with the service worker
 npm run icons     # regenerate PNG icons from public/icon.svg

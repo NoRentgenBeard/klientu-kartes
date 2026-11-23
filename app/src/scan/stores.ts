@@ -1,0 +1,81 @@
+/**
+ * Store names the scanner recognises on a card (matched case-, space- and
+ * diacritics-insensitively). Companies of cards already in the app are added at runtime,
+ * so the list grows with use. Display spelling is taken from here.
+ */
+export const KNOWN_STORES: readonly string[] = [
+  // From the sample cards
+  'DEPO',
+  'PROMO Cash&Carry',
+  'Ksenukai',
+  'JYSK',
+  'Cenu klubs',
+  'Drogas',
+  'Denim Dream',
+  'Dino zoo',
+  'Douglas',
+  'Peek & Cloppenburg',
+  'Apollo kino',
+  'Mēness aptieka',
+  'XS toys',
+  // Common in Latvia
+  'Rimi',
+  'Maxima',
+  'Lidl',
+  'Elvi',
+  'Mego',
+  'Aibe',
+  'Top!',
+  'Spar',
+  'Narvesen',
+  'Circle K',
+  'Virši',
+  'Neste',
+  'Viada',
+  'IKEA',
+  'Bauhaus',
+  'K-Rauta',
+  'Kurši',
+  'Krūza',
+  'Euronics',
+  'Elkor',
+  'RD Electronics',
+  '220.lv',
+  'Pepco',
+  'Sportland',
+  'Decathlon',
+  'Lindex',
+  'H&M',
+  'Reserved',
+  'Zara',
+  'Benu aptieka',
+  'Euroaptieka',
+  'Apotheka',
+  'Gintarine aptieka',
+  'Forum Cinemas',
+  'Ezītis miglā',
+  'Hesburger',
+];
+
+/**
+ * Other things printed on a store's cards that identify it: a short form of the
+ * name, a programme name or the web address. Matched exactly (as words).
+ */
+export const STORE_ALIASES: Readonly<Record<string, readonly string[]>> = {
+  'PROMO Cash&Carry': ['Cash&Carry', 'Cash & Carry', 'cashcarry.lv'],
+  'Cenu klubs': ['cenuklubs.lv'],
+  Drogas: ['drogas.lv'],
+  'Denim Dream': ['denimdream.com', 'denimdream.lv'],
+  DEPO: ['depo.lv', 'DEPO DIY'],
+  Ksenukai: ['ksenukai.lv'],
+  JYSK: ['jysk.lv'],
+  'Peek & Cloppenburg': ['Peek&Cloppenburg', 'peek-cloppenburg'],
+  'Dino zoo': ['dinozoo.lv'],
+  'Apollo kino': ['apollokino.lv'],
+  'Mēness aptieka': ['menessaptieka.lv'],
+  Douglas: ['douglas.lv'],
+  Rimi: ['rimi.lv', 'Mans Rimi'],
+  Maxima: ['maxima.lv'],
+  'Circle K': ['circlek.lv'],
+  Virši: ['virsi.lv'],
+};

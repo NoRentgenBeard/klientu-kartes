@@ -51,7 +51,8 @@ export default defineConfig(({ mode }) => {
           // Precache everything so the app works offline from the first install,
           // including the scanner/OCR engines added in milestone 4.
           globPatterns: ['**/*.{js,mjs,css,html,svg,png,ico,webmanifest,wasm,traineddata,gz,json}'],
-          globIgnores: ['demo/**'],
+          // The plain (non-SIMD) OCR engine is only for very old devices: served, not precached.
+          globIgnores: ['demo/**', 'ocr/tesseract-core-lstm.wasm.js'],
           maximumFileSizeToCacheInBytes: 40 * 1024 * 1024,
           cleanupOutdatedCaches: true,
           // The real app's service worker must not answer for the demo pages.

@@ -55,6 +55,9 @@ export const lv = {
   readingText: 'Lasa tekstu…',
   findingEndDate: 'Meklē derīguma termiņu',
   findingHolder: 'Meklē turētāju',
+  searchingCode: 'Meklē kodu…', // NEW — first step before the code is found
+  foundQr: 'Atrasts QR kods', // NEW — like "Atrasts svītrkods", for QR codes
+  imageUnreadable: 'Šo attēlu neizdevās atvērt. Pamēģini citu foto.', // NEW
 
   // Pārbaude
   review: 'Pārbaude',
@@ -67,6 +70,10 @@ export const lv = {
   accept: 'Apstiprināt',
   noCodeFound: 'Kods netika atrasts',
   generatedFromNumber: 'Izveidots no numura',
+  datePlaceholder: 'DD.MM.GGGG vai MM/GGGG', // NEW
+  dateNotUnderstood: 'Nesaprotu datumu — raksti, piem., 30.09.2027 vai 09/2027', // NEW
+  acceptHint: 'Lai apstiprinātu, vajag uzņēmumu, numuru un turētāju.', // NEW
+  zoom: 'Tuvināt', // NEW — zoom slider in the crop editor (screen readers)
 
   // Apgriešana
   crop: 'Apgriezt',

@@ -8,6 +8,28 @@ export function normalizeKey(s: string): string {
     .trim();
 }
 
+/** Levenshtein edit distance. */
+export function editDistance(a: string, b: string): number {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+/** 1 = identical, 0 = nothing in common (by edit distance). */
+export function similarity(a: string, b: string): number {
+  const max = Math.max(a.length, b.length);
+  return max === 0 ? 1 : 1 - editDistance(a, b) / max;
+}
+
 /**
  * Stable 32-bit FNV-1a hash with a final avalanche (murmur3 fmix32). Without the mix,
  * the low bits — which `% 8` uses — depend only on the low bits of each character,

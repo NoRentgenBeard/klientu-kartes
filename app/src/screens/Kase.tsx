@@ -146,6 +146,8 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
                 onClick={() => s.id !== card.id && onSwitch(s)}
               >
                 {holders.find((h) => h.id === s.holder)?.name}
+                {/* Two cards of this store for the same holder: tell them apart by the number. */}
+                {siblings.filter((o) => o.holder === s.holder).length > 1 && ` ·${s.codeValue.slice(-4)}`}
               </button>
             ))}
           </div>

@@ -6,14 +6,19 @@ import { normalizeKey } from './lib/text';
 import { Kase } from './screens/Kase';
 import { PinReplace } from './screens/PinReplace';
 import { Sakums } from './screens/Sakums';
+import { Suspense, lazy } from 'preact/compat';
+
+// The add flow (scanner + OCR) loads only when "+" is tapped, so start-up stays fast.
+const AddFlow = lazy(() => import('./screens/add/AddFlow').then((m) => ({ default: m.AddFlow })));
 import { UpdateBanner } from './components/UpdateBanner';
 
-/** Screen state. Pievienot (M4), Kartes detaļas and Iestatījumi (M5) are added later. */
+/** Screen state. Kartes detaļas and Iestatījumi (milestone 5) are added later. */
 export function App() {
   const [cards, setCards] = useState<Card[] | null>(null);
   const [holders, setHolders] = useState<Holder[]>([]);
   const [openId, setOpenId] = useState<string | null>(null);
   const [pinChoice, setPinChoice] = useState<{ card: Card; pinned: Card[] } | null>(null);
+  const [adding, setAdding] = useState(false);
 
   const reload = useCallback(async () => {
     const [c, h] = await Promise.all([repo.listCards(), repo.listHolders()]);
@@ -43,7 +48,7 @@ export function App() {
     await reload();
   };
 
-  // Not built yet: add flow (milestone 4), card details and settings (milestone 5).
+  // Not built yet: card details and settings (milestone 5).
   const notYet = () => {};
 
   const open = cards?.find((c) => c.id === openId);
@@ -52,7 +57,7 @@ export function App() {
   return (
     <>
       {cards && (
-        <Sakums cards={cards} holders={holders} onOpenCard={openCard} onAdd={notYet} onSettings={notYet} />
+        <Sakums cards={cards} holders={holders} onOpenCard={openCard} onAdd={() => setAdding(true)} onSettings={notYet} />
       )}
       {open && (
         <Kase
@@ -64,6 +69,19 @@ export function App() {
           onDetails={notYet}
           onClose={() => setOpenId(null)}
         />
+      )}
+      {adding && cards && (
+        <Suspense fallback={null}>
+          <AddFlow
+            cards={cards}
+            holders={holders}
+            onSaved={() => {
+              setAdding(false);
+              void reload();
+            }}
+            onCancel={() => setAdding(false)}
+          />
+        </Suspense>
       )}
       {pinChoice && (
         <PinReplace
