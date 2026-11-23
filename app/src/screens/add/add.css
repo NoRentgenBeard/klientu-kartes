@@ -679,3 +679,46 @@
 .crop__done:disabled {
   opacity: 0.4;
 }
+
+/* ---------- Kartes detaļas (extra sections) ---------- */
+
+.review__photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 320px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--grouped-fill);
+}
+
+.review__photo img {
+  display: block;
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+}
+
+.review__value {
+  margin: 0;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--grouped-fill);
+}
+
+.review__toggle--row {
+  margin-bottom: 0;
+}
+
+.review__delete {
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--grouped-fill);
+  color: var(--destructive);
+  font-size: 17px;
+  font-weight: 600;
+}

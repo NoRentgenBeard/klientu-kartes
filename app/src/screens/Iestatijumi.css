@@ -1,0 +1,125 @@
+/* Iestatījumi — SPEC 6.4: iOS grouped list on white */
+
+.settings {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  animation: settings-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: -8px 0 24px rgb(0 0 0 / 0.08);
+}
+
+.settings__bar {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--safe-top) calc(var(--safe-right) + 8px) 0 calc(var(--safe-left) + 8px);
+}
+
+.settings__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 8px;
+  font-size: 17px;
+}
+
+.settings__body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 calc(var(--safe-right) + var(--gutter)) calc(var(--safe-bottom) + 40px) calc(var(--safe-left) + var(--gutter));
+}
+
+.settings__body > * {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.settings__title {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.settings__group {
+  margin-top: 24px;
+}
+
+.settings__group-title {
+  margin: 0 0 6px 16px;
+  color: var(--group-header);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.settings__list {
+  overflow: hidden;
+  border-radius: var(--radius-group);
+  background: var(--grouped-fill);
+}
+
+.settings__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 50px;
+  padding: 8px 16px;
+  text-align: left;
+  font-size: 17px;
+}
+
+/* Inset separators between rows */
+.settings__row + .settings__row::before,
+.settings__row + input + .settings__row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 0;
+  border-top: 0.5px solid var(--separator);
+}
+
+button.settings__row:active:not(:disabled) {
+  background: var(--chip-bg);
+}
+
+button.settings__row:disabled {
+  cursor: default;
+}
+
+.settings__row-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings__row-label--action {
+  font-weight: 600;
+}
+
+.settings__row-value {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.settings__check {
+  color: var(--text);
+}
+
+.settings__chevron {
+  color: var(--chevron);
+}
+
+@keyframes settings-in {
+  from {
+    transform: translateX(100%);
+  }
+}

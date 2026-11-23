@@ -33,6 +33,7 @@ export const defaultTheme: Theme = {
     statusExpired: '#7F1A1A',
     codeBg: '#FFFFFF',
     codeInk: '#000000',
+    destructive: '#D7372C',
   },
   cardColors: [
     '#A9B4C6', // slate blue

@@ -45,7 +45,17 @@ export const lv = {
   holders: 'Turētāji',
   about: 'Par lietotni',
   version: 'Versija',
-  never: 'Vēl nav', // NEW — "Pēdējā kopija: Vēl nav" before the first backup
+  never: 'Vēl nav', // NEW — "Pēdējā kopija: Vēl nav" before the first backup; also "Pēdējo reizi lietota"
+  preparing: 'Sagatavo…', // NEW — while the backup file is made
+  backupReady: 'Kopija ir gatava', // NEW — if iPhone needs one more tap before the share sheet
+  backupFailed: 'Kopiju neizdevās saglabāt.', // NEW
+  mergeHint: 'Pievieno jaunās kartes, esošās paliek.', // NEW — under "Pievienot"
+  replaceHint: 'Izdzēš kartes šajā telefonā un ieliek kartes no kopijas.', // NEW — under "Aizstāt"
+  replaceTitle: 'Aizstāt visas kartes?', // NEW
+  restored: 'Kopija atjaunota', // NEW
+  notABackup: 'Šis fails nav Klientu karšu kopija.', // NEW
+  backupTooNew: 'Šī kopija ir no jaunākas lietotnes versijas. Vispirms atjaunini lietotni.', // NEW
+  holderName: 'Turētāja nosaukums', // NEW — rename sheet title
 
   // Pievienot / Apstrāde
   takePhoto: 'Uzņemt foto',
@@ -85,6 +95,9 @@ export const lv = {
   cardDetails: 'Kartes detaļas',
   lastUsed: 'Pēdējo reizi lietota',
   delete: 'Dzēst',
+  save: 'Saglabāt', // NEW — bottom button in Kartes detaļas
+  originalPhoto: 'Oriģinālais foto', // NEW
+  deleteTitle: 'Dzēst šo karti?', // NEW
 
   // System
   demo: 'Demo', // NEW — badge in the /demo/ build with sample cards
@@ -95,6 +108,26 @@ export const lv = {
 
 export type Strings = typeof lv;
 
-/** "Pievienotas 3 · Jau bija 11" (SPEC 8). */
-export const restoreSummary = (added: number, existing: number) =>
-  `Pievienotas ${added} · Jau bija ${existing}`;
+/** Latvian: 1, 21, 31… take the singular; 11 doesn't. */
+const one = (n: number) => n % 10 === 1 && n % 100 !== 11;
+
+/** "14 kartes", "1 karte", "21 karte". */
+export const cardCount = (n: number) => `${n} ${one(n) ? 'karte' : 'kartes'}`;
+
+/** "Pievienotas 3 · Jau bija 11" (SPEC 8), plus "· Atjauninātas 2" when newer versions replaced old ones. */
+export const restoreSummary = (added: number, existing: number, updated = 0) =>
+  `${one(added) ? 'Pievienota' : 'Pievienotas'} ${added} · Jau bija ${existing}` +
+  (updated ? ` · ${one(updated) ? 'Atjaunināta' : 'Atjauninātas'} ${updated}` : ''); // NEW: "Atjauninātas"
+
+/** NEW — after "Aizstāt": "Atjaunotas 14 kartes". */
+export const replaceSummary = (n: number) => `${one(n) ? 'Atjaunota' : 'Atjaunotas'} ${cardCount(n)}`;
+
+/** NEW — "Kopijā ir 14 kartes · 23.11.2026". */
+export const backupInfo = (n: number, date: string | null) => `Kopijā ir ${cardCount(n)}${date ? ` · ${date}` : ''}`;
+
+/** NEW — "Telefonā ir 12 kartes — tās tiks izdzēstas. To nevar atsaukt." */
+export const replaceWarning = (n: number) =>
+  `Telefonā ir ${cardCount(n)} — ${one(n) ? 'tā tiks izdzēsta' : 'tās tiks izdzēstas'}. To nevar atsaukt.`;
+
+/** NEW — "Karte „DEPO · Happy Fish“ tiks izdzēsta no šī telefona. To nevar atsaukt." */
+export const deleteWarning = (name: string) => `Karte „${name}“ tiks izdzēsta no šī telefona. To nevar atsaukt.`;

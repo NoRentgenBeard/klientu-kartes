@@ -42,7 +42,7 @@ export type PinResult =
   | { ok: false; reason: 'full'; pinned: Card[] };
 
 const now = () => new Date().toISOString();
-const newId = () =>
+export const newId = () =>
   globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
 /** Personīgā → Happy Fish → Zaļā josta, then A–Z (Latvian collation) inside each holder. */
@@ -114,13 +114,32 @@ export function createRepo(name: string = DB_NAME) {
   }
 
   async function deleteCard(id: string): Promise<void> {
-    await (await db()).delete('cards', id);
+    const tx = (await db()).transaction('cards', 'readwrite');
+    const card = await tx.store.get(id);
+    await tx.store.delete(id);
+    if (card?.pinned) {
+      // Close the gap so pinOrder stays 0..n-1.
+      const pinned = (await tx.store.getAll()).filter((c) => c.pinned).sort((a, b) => (a.pinOrder ?? 0) - (b.pinOrder ?? 0));
+      for (const [i, c] of pinned.entries()) await tx.store.put({ ...c, pinOrder: i });
+    }
+    await tx.done;
   }
 
-  /** Opening a card on Kasē. Doesn't bump updatedAt (that's for edits, used by backup merge). */
-  async function markUsed(id: string): Promise<void> {
+  /**
+   * Opening a card on Kasē. Doesn't bump updatedAt (that's for edits, used by backup merge).
+   * Returns the previous use, shown as "Pēdējo reizi lietota" in card details.
+   */
+  async function markUsed(id: string): Promise<string | undefined> {
     const card = await getCard(id);
     if (card) await (await db()).put('cards', { ...card, lastUsedAt: now() });
+    return card?.lastUsedAt;
+  }
+
+  /** Writes cards as they are (backup restore → Pievienot). */
+  async function putCards(cards: readonly Card[]): Promise<void> {
+    const tx = (await db()).transaction('cards', 'readwrite');
+    for (const c of cards) await tx.store.put(c);
+    await tx.done;
   }
 
   async function setPinned(id: string, pinned: boolean, replaceId?: string): Promise<PinResult> {
@@ -180,7 +199,7 @@ export function createRepo(name: string = DB_NAME) {
     await (await db()).put('meta', value, key);
   }
 
-  /** Used by "Atjaunot no kopijas → Aizstāt" (milestone 5). */
+  /** "Atjaunot no kopijas → Aizstāt". */
   async function replaceAllCards(cards: readonly Card[]): Promise<void> {
     const tx = (await db()).transaction('cards', 'readwrite');
     await tx.store.clear();
@@ -205,6 +224,7 @@ export function createRepo(name: string = DB_NAME) {
     updateCard,
     deleteCard,
     markUsed,
+    putCards,
     setPinned,
     listHolders,
     renameHolder,

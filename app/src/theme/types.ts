@@ -36,6 +36,8 @@ export interface Theme {
     /** Background behind generated codes — always white for scanners. */
     codeBg: string;
     codeInk: string;
+    /** Delete / replace buttons. */
+    destructive: string;
   };
   /** Exactly 8 card colours, indexed by Card.colorIndex. */
   cardColors: readonly [string, string, string, string, string, string, string, string];

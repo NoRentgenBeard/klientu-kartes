@@ -86,7 +86,8 @@
   font-size: 17px;
   font-weight: 700;
   line-height: 1.2;
-  overflow-wrap: break-word;
+  /* A word that doesn't fit beside the tag moves under it instead of being split ("PROM/O"). */
+  overflow-wrap: normal;
 }
 
 .card-face__tile-text .holder-tag {

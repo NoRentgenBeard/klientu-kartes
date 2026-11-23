@@ -16,7 +16,8 @@ interface Props {
   holders: Holder[];
   onSwitch: (card: Card) => void;
   onTogglePin: (card: Card) => void;
-  onDetails: (card: Card) => void;
+  /** `lastUsedAt` = the use before this one (opening Kasē counts as a use). */
+  onDetails: (card: Card, lastUsedAt: string | undefined) => void;
   onClose: () => void;
 }
 
@@ -36,8 +37,13 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
 
   useWakeLock();
 
+  // Mark each card used once while Kasē is open, remembering its previous use for details.
+  const usedBefore = useRef(new Map<string, string | undefined>());
   useEffect(() => {
-    void repo.markUsed(card.id);
+    if (!usedBefore.current.has(card.id)) {
+      usedBefore.current.set(card.id, card.lastUsedAt);
+      void repo.markUsed(card.id).then((prev) => usedBefore.current.set(card.id, prev));
+    }
     setPhoto('off');
   }, [card.id]);
 
@@ -104,7 +110,7 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
             >
               <PinIcon filled={card.pinned} />
             </button>
-            <button type="button" class="kase-tool" aria-label={lv.cardDetails} onClick={() => onDetails(card)}>
+            <button type="button" class="kase-tool" aria-label={lv.cardDetails} onClick={() => onDetails(card, usedBefore.current.get(card.id))}>
               <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="currentColor">
                 <circle cx="4" cy="11" r="2" />
                 <circle cx="11" cy="11" r="2" />

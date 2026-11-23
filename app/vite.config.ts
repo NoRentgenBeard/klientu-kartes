@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import pkg from './package.json' with { type: 'json' };
 
 // Two builds from the same code:
 //   npm run build       → dist/        the real app (starts empty)
@@ -11,6 +12,8 @@ export default defineConfig(({ mode }) => {
   const demo = mode === 'demo';
   return {
     base: './',
+    // Iestatījumi → Versija: "0.5.0 (3c4b6fa)"; the commit comes from VITE_COMMIT (package.json scripts).
+    define: { __APP_VERSION__: JSON.stringify(pkg.version) },
     build: demo ? { outDir: 'dist/demo', emptyOutDir: true } : undefined,
     plugins: [
       preact(),
