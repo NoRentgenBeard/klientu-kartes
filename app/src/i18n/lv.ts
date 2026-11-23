@@ -25,9 +25,6 @@ export const lv = {
   // Kasē
   photo: 'Foto',
   code: 'Kods',
-  brightness: 'Spilgtums',
-  brightnessTip: 'Pagriez ekrāna spilgtumu uz maksimumu Vadības centrā — tad kasē kods nolasīsies ātrāk.', // NEW
-  ok: 'Labi', // NEW — closes the brightness tip
   pin: 'Piespraust', // NEW — pin button (screen readers)
   unpin: 'Atspraust', // NEW
   pinFullTitle: 'Jau piespraustas 4 kartes', // NEW

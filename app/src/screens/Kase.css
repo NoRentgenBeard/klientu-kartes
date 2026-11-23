@@ -260,41 +260,6 @@
   color: var(--tag-bg);
 }
 
-/* Brightness tip */
-
-.kase-tip {
-  position: absolute;
-  left: var(--gutter);
-  right: var(--gutter);
-  bottom: calc(var(--safe-bottom) + 84px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 10px 14px 18px;
-  border-radius: 20px;
-  background: var(--tag-text);
-  color: var(--tag-bg);
-  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
-  animation: kase-fade-in 0.18s ease-out;
-}
-
-.kase-tip p {
-  margin: 0;
-  flex: 1;
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-.kase-tip__ok {
-  flex: none;
-  height: 44px;
-  padding: 0 18px;
-  border-radius: 22px;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  font-weight: 700;
-}
-
 /* ---------- Landscape ---------- */
 
 .kase-land {

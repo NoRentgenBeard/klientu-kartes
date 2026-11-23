@@ -30,8 +30,6 @@ const CLOSE_VELOCITY = 0.6; // pt per ms
 export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails, onClose }: Props) {
   const landscape = useMediaQuery(LANDSCAPE);
   const [photo, setPhoto] = useState<PhotoMode>('off');
-  const [tip, setTip] = useState(false);
-  const [tipSeen, setTipSeen] = useState(true);
   const [closing, setClosing] = useState(false);
   const holder = holders.find((h) => h.id === card.holder);
   const photoUrl = useObjectUrl(photo === 'original' ? card.photoOriginal : card.photoCropped);
@@ -42,10 +40,6 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
     void repo.markUsed(card.id);
     setPhoto('off');
   }, [card.id]);
-
-  useEffect(() => {
-    void repo.getMeta('brightnessTipSeen').then((seen) => setTipSeen(!!seen));
-  }, []);
 
   const close = () => {
     if (closing) return;
@@ -61,14 +55,6 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
 
   const togglePhoto = () => setPhoto((p) => (p === 'off' ? 'cropped' : 'off'));
   const flipPhoto = () => setPhoto((p) => (p === 'cropped' ? 'original' : 'cropped'));
-
-  const showTip = () => {
-    setTip(true);
-    if (!tipSeen) {
-      setTipSeen(true);
-      void repo.setMeta('brightnessTipSeen', true);
-    }
-  };
 
   const codeOrPhoto = (layout: 'portrait' | 'landscape') =>
     photo === 'off' ? (
@@ -145,9 +131,6 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
           <RoundButton label={photo === 'off' ? lv.photo : lv.code} onClick={togglePhoto} active={photo !== 'off'}>
             {photo === 'off' ? <PhotoIcon /> : <CodeIcon />}
           </RoundButton>
-          <RoundButton label={lv.brightness} hideLabel={tipSeen} onClick={showTip}>
-            <SunIcon />
-          </RoundButton>
         </div>
 
         {siblings.length > 1 && (
@@ -166,14 +149,6 @@ export function Kase({ card, siblings, holders, onSwitch, onTogglePin, onDetails
           </div>
         )}
 
-        {tip && (
-          <div class="kase-tip" role="status">
-            <p>{lv.brightnessTip}</p>
-            <button type="button" class="kase-tip__ok" onClick={() => setTip(false)}>
-              {lv.ok}
-            </button>
-          </div>
-        )}
       </Sheet>
     </div>
   );
@@ -250,13 +225,11 @@ function Sheet({ children, onClose, label }: { children: preact.ComponentChildre
 
 function RoundButton({
   label,
-  hideLabel,
   active,
   onClick,
   children,
 }: {
   label: string;
-  hideLabel?: boolean;
   active?: boolean;
   onClick: () => void;
   children: preact.ComponentChildren;
@@ -264,7 +237,7 @@ function RoundButton({
   return (
     <button type="button" class={`kase-round${active ? ' kase-round--on' : ''}`} onClick={onClick} aria-label={label}>
       <span class="kase-round__icon">{children}</span>
-      {!hideLabel && <span class="kase-round__label">{label}</span>}
+      <span class="kase-round__label">{label}</span>
     </button>
   );
 }
@@ -305,11 +278,3 @@ function CodeIcon() {
   );
 }
 
-function SunIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" />
-    </svg>
-  );
-}
